@@ -16,7 +16,8 @@ public class RepositoryAccess {
 	public Integer increment() {
 		try {
 			lock.lock();
-			while ((counter + 1) - counter > THRESHOLD) {
+			while (counter >= THRESHOLD) {
+				System.out.println(Thread.currentThread().getName() + ":INCR:threshold wait:" + counter);
 				increment.await();
 			}
 
@@ -36,7 +37,8 @@ public class RepositoryAccess {
 	public Integer decrement() {
 		try {
 			lock.lock();
-			while ((counter - 1) - counter < -THRESHOLD) {
+			while (counter <= -THRESHOLD) {
+				System.out.println(Thread.currentThread().getName() + ":DECR:threshold wait:" + counter);
 				decrement.await();
 			}
 
