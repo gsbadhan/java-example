@@ -17,6 +17,11 @@ public class Test {
 		t1.setName("consumer");
 		t1.start();
 
-
+		// to avoid stop JVM's main thread
+		try {
+			Thread.currentThread().join(5 * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
