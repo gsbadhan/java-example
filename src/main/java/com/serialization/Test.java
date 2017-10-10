@@ -20,7 +20,7 @@ public class Test {
 		student.setCollege("London college");
 		// should not save, because its `transient` field
 		student.setAddress("street 106,London");
-		//student.setDob(new DOB(12, 05, 1956));
+		student.setDob(new DOB(12, 05, 1956));
 		outputStream.writeObject(student);
 		outputStream.flush();
 		outputStream.close();

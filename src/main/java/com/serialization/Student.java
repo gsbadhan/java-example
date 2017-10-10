@@ -1,5 +1,6 @@
 package com.serialization;
 
+import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 public class Student implements Serializable {
@@ -9,7 +10,7 @@ public class Student implements Serializable {
 	private String name;
 	private static String college = "Cambridge college";
 	private transient String address;
-	//should be serialize
+	// should be serialize
 	private DOB dob;
 
 	public int getId() {
@@ -50,6 +51,22 @@ public class Student implements Serializable {
 
 	public void setDob(DOB dob) {
 		this.dob = dob;
+	}
+
+	/**
+	 * used this method to maintain singleton within JVM, its automatically
+	 * called at time of IO write.
+	 **/
+	protected Object writeReplace() throws ObjectStreamException {
+		return this;
+	}
+
+	/**
+	 * used this method to maintain singleton within JVM, its automatically
+	 * called at time of IO read.
+	 **/
+	protected Object readReslove() throws ObjectStreamException {
+		return this;
 	}
 
 	@Override
